@@ -88,11 +88,14 @@ class RandomWalkerAlgorithm(cellprofiler.module.ImageSegmentation):
 
         labels_data[markers_data < self.markers_b.value] = 2
 
+        multichannel = x.multichannel
+
         y_data = skimage.segmentation.random_walker(
             data=data,
             labels=labels_data,
             beta=self.beta.value,
-            mode="cg_mg"
+            mode="cg_mg",
+            multichannel=multichannel
         )
 
         y_data = skimage.measure.label(y_data)
